@@ -7,13 +7,14 @@ $host = 'localhost';
 $username = 'lab5_user';
 $password = 'password123';
 $dbname = 'world';
+//const $stmt;
 
 $country = $_GET['country']?? '';
-$city = $_GET['city'];
+$city = $_GET['city']?? '';
 
 $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-//$stmt= $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
-//$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt= $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
+
 
 if($city == "false"){
   $stmt= $conn->query("SELECT * FROM countries WHERE name LIKE '%$country%'");
@@ -26,22 +27,7 @@ elseif($city=="true"){
 }
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/*
 
-if($results){
-  $stmt = $conn->query("SELECT c.name as city,c.district, c.population FROM cities c JOIN countries cs on c.country_code = cs.code WHERE c.population;");
-
-
-
-}
-else{
-  $stmt = $conn->query("SELECT c.name as city,c.district, c.population FROM cities c JOIN countries cs on c.country_code = cs.code WHERE c.population;");
-  $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  //echo("ERROR");
-}
-
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-*/
 
 ?>
 
@@ -59,10 +45,10 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php foreach($results as $row): ?>
 
     <tr>
-      <th><?= $row['name']?></th>
-      <th><?= $row['continent']?></th>
-      <th><?= $row['independence_year']?></th>
-      <th><?= $row['head_of_state']?></th>
+      <td><?= $row['name']?></td>
+      <td><?= $row['continent']?></td>
+      <td><?= $row['independence_year']?></td>
+      <td><?= $row['head_of_state']?></td>
 
     </tr>
 
@@ -81,9 +67,9 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <?php foreach($results as $row): ?>
 
     <tr>
-      <th><?= $row['name']?></th>
-      <th><?= $row['district']?></th>
-      <th><?= $row['population']?></th>
+      <td><?= $row['name']?></td>
+      <td><?= $row['district']?></td>
+      <td><?= $row['population']?></td>
       
     </tr>
 
